@@ -50,9 +50,10 @@ h1, h2, h3, p, dl, dd, ul, figure { margin: 0; }
 ul { padding: 0; list-style: none; }
 
 .sheet {
+  --gutter: clamp(16px, 4vw, 40px);
   max-width: 1160px;
   margin: 0 auto;
-  padding: 0 clamp(16px, 4vw, 40px);
+  padding: 0 var(--gutter);
 }
 .mono {
   font-family: var(--font-mono);
@@ -317,6 +318,33 @@ ul { padding: 0; list-style: none; }
   .pager { grid-template-columns: minmax(0, 1fr); }
   .pager .next { text-align: left; }
 }
+/* Top bar on phones: one row, stays in reach, thumb-sized targets */
+@media (max-width: 700px) {
+  .bar {
+    position: sticky; top: 0; z-index: 15;
+    flex-wrap: nowrap; align-items: center; gap: 12px;
+    margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter);
+    min-height: 52px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand-tail { display: none; }
+  .brand { display: flex; align-items: center; min-height: 52px; font-size: 13px; color: var(--ink); white-space: nowrap; }
+  .menu summary { display: flex; align-items: center; min-height: 52px; padding: 0 0 0 16px; font-size: 13px; }
+  .menu summary::after { margin: 0 2px 4px 10px; }
+  .menu[open] summary::after { margin-bottom: -4px; }
+  .menu-list { left: 0; right: 0; top: 100%; min-width: 0; max-width: none; padding: 4px 0; border-width: 0 0 1.5px; max-height: calc(100vh - 52px); overflow-y: auto; }
+  .menu-list a { padding: 15px var(--gutter); font-size: 13px; }
+  .menu-list li + li { border-top: 1px solid var(--line); }
+  .menu-list .all { margin-top: 0; padding-top: 0; }
+  #projects, #skills, #experience, #contact { scroll-margin-top: 64px; }
+  .hero { padding-top: 32px; }
+}
+@media (max-width: 380px) {
+  .section-head { gap: 12px; }
+  .section-head h2 { font-size: 32px; }
+  .dim { min-width: 16px; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .menu summary::after { transition: none; }
@@ -328,7 +356,7 @@ ul { padding: 0; list-style: none; }
 <div class="sheet">
 
   <header class="bar">
-    <a class="mono" href="#home">Anson Liang · Mechanical engineering portfolio</a>
+    <a class="mono brand" href="#home">Anson Liang<span class="brand-tail"> · Mechanical engineering portfolio</span></a>
     <nav class="mono" aria-label="Projects">
       <details class="menu" id="project-menu">
         <summary>Projects</summary>
@@ -356,7 +384,6 @@ ul { padding: 0; list-style: none; }
       <dl class="contact-box" id="contact" aria-label="Contact">
       <div><dt>Email</dt><dd><a href="mailto:anson.liang.1511@gmail.com">anson.liang.1511@gmail.com</a></dd></div>
       <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/ansonliang1" rel="noopener">linkedin.com/in/ansonliang1</a></dd></div>
-      <div><dt>Resume</dt><dd><a data-report="resume" href="Anson_Liang_Resume.pdf" download>Download PDF</a><span class="msg" role="status"></span></dd></div>
       </dl>
     </div>
   </section>
@@ -752,8 +779,7 @@ ul { padding: 0; list-style: none; }
 (function () {
   var NAMES = {
     chair: 'Anson_Liang_Sustainable_Chair_Report.pdf',
-    trebuchet: 'Anson_Liang_Trebuchet_Report.pdf',
-    resume: 'Anson_Liang_Resume.pdf'
+    trebuchet: 'Anson_Liang_Trebuchet_Report.pdf'
   };
   var saver = null;
   if (window.claude && typeof window.claude.use === 'function') {
