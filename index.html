@@ -74,7 +74,12 @@ ul { padding: 0; list-style: none; }
   border-bottom: 1px solid var(--line);
 }
 .bar { position: relative; }
-.bar nav { margin-left: auto; }
+.bar nav { margin-left: auto; display: flex; align-items: center; gap: 18px; }
+.resume-btn { display: inline-block; padding: 7px 14px; border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); line-height: 1.2; cursor: pointer; transition: transform 0.08s; }
+.bar a.resume-btn:hover { background: transparent; color: var(--ink); text-decoration: none; }
+.resume-btn:active { transform: translateY(1px); }
+.resume-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.resume-btn[data-busy] { opacity: 0.6; cursor: progress; }
 .menu summary { list-style: none; cursor: pointer; padding: 6px 0 6px 12px; color: var(--ink); user-select: none; }
 .menu summary::-webkit-details-marker { display: none; }
 .menu summary::after { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 0 3px 9px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform 0.15s; }
@@ -330,7 +335,9 @@ ul { padding: 0; list-style: none; }
   }
   .brand-tail { display: none; }
   .brand { display: flex; align-items: center; min-height: 52px; font-size: 13px; color: var(--ink); white-space: nowrap; }
-  .menu summary { display: flex; align-items: center; min-height: 52px; padding: 0 0 0 16px; font-size: 13px; }
+  .bar nav { gap: 14px; }
+  .menu summary { display: flex; align-items: center; min-height: 52px; padding: 0 0 0 8px; font-size: 13px; }
+  .resume-btn { padding: 9px 13px; font-size: 13px; }
   .menu summary::after { margin: 0 2px 4px 10px; }
   .menu[open] summary::after { margin-bottom: -4px; }
   .menu-list { left: 0; right: 0; top: 100%; min-width: 0; max-width: none; padding: 4px 0; border-width: 0 0 1.5px; max-height: calc(100vh - 52px); overflow-y: auto; }
@@ -341,12 +348,19 @@ ul { padding: 0; list-style: none; }
   .hero { padding-top: 32px; }
 }
 @media (max-width: 380px) {
+  .bar { gap: 8px; }
+  .bar nav { gap: 8px; }
+  .brand, .menu summary, .resume-btn { font-size: 12px; letter-spacing: 0.03em; }
+  .menu summary { padding-left: 4px; }
+  .menu summary::after { margin-left: 7px; }
+  .resume-btn { padding: 8px 10px; }
   .section-head { gap: 12px; }
   .section-head h2 { font-size: 32px; }
   .dim { min-width: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .resume-btn { transition: none; }
   .menu summary::after { transition: none; }
   .fill { animation: none; }
 }
@@ -357,7 +371,7 @@ ul { padding: 0; list-style: none; }
 
   <header class="bar">
     <a class="mono brand" href="#home">Anson Liang<span class="brand-tail"> · Mechanical engineering portfolio</span></a>
-    <nav class="mono" aria-label="Projects">
+    <nav class="mono" aria-label="Site">
       <details class="menu" id="project-menu">
         <summary>Projects</summary>
         <ul class="menu-list">
@@ -369,6 +383,7 @@ ul { padding: 0; list-style: none; }
           <li class="all"><a href="#projects">All projects</a></li>
         </ul>
       </details>
+      <a class="resume-btn" data-report="resume" href="Anson_Liang_Resume.pdf" target="_blank" rel="noopener">Resume</a>
     </nav>
   </header>
 
@@ -779,7 +794,8 @@ ul { padding: 0; list-style: none; }
 (function () {
   var NAMES = {
     chair: 'Anson_Liang_Sustainable_Chair_Report.pdf',
-    trebuchet: 'Anson_Liang_Trebuchet_Report.pdf'
+    trebuchet: 'Anson_Liang_Trebuchet_Report.pdf',
+    resume: 'Anson_Liang_Resume.pdf'
   };
   var saver = null;
   if (window.claude && typeof window.claude.use === 'function') {
