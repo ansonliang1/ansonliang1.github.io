@@ -7,10 +7,15 @@
 <meta name="description" content="Mechanical engineering portfolio of Anson Liang, Illinois Institute of Technology: Formula SAE rear wing, whistling research, and design-build projects.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* Layout idea: the page is a drawing sheet. A title block carries the facts,
    dimension lines divide sections, and red-line marks show limit vs. result. */
+/* Headings: Latin Modern Sans, the maintained OpenType version of Computer Modern Sans.
+   Copyright 2003, 2009 B. Jackowski and J. M. Nowacki (on behalf of TeX users groups),
+   GUST Font License. Served from the site's own fonts/ folder. */
+@font-face { font-family: "Latin Modern Sans"; src: url("fonts/LMSans10-Regular.woff") format("woff"); font-weight: 400 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Latin Modern Sans"; src: url("fonts/LMSans10-Bold.woff") format("woff"); font-weight: 600 900; font-style: normal; font-display: swap; }
 :root {
   /* Palette: Ash Grey CCDAD1, Ash Grey 9CAEA9, Grey Olive 788585, Dim Grey 6F6866,
      on a neutral charcoal grey page. One dark theme, set explicitly. */
@@ -25,9 +30,9 @@
   --display: #CCDAD1;    /* light Ash Grey: headings */
   --accent: #9CAEA9;     /* Ash Grey: links, labels */
   --mark: #9CAEA9;       /* Ash Grey: surname, results */
-  --font-display: "Big Shoulders Display", "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+    --font-display: "Latin Modern Sans", "CMU Sans Serif", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 ::selection { background: var(--accent); color: var(--paper); }
 
@@ -92,6 +97,7 @@ ul { padding: 0; list-style: none; }
 .menu-list .all { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line); }
 .bar a { text-decoration: none; }
 .bar a:hover { text-decoration: underline; }
+.brand-name { font-weight: 700; color: var(--ink); }
 
 /* Hero */
 .hero {
@@ -104,8 +110,8 @@ ul { padding: 0; list-style: none; }
 .hero h1 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(72px, 13vw, 168px);
-  line-height: 0.84;
+  font-size: clamp(54px, 10.5vw, 132px);
+  line-height: 0.9;
   letter-spacing: -0.005em;
   text-transform: uppercase;
   color: var(--display);
@@ -113,7 +119,7 @@ ul { padding: 0; list-style: none; }
 .hero h1 span { display: block; }
 .hero h1 span:last-child { color: var(--mark); }
 .thesis {
-  margin-top: 28px;
+  margin-top: clamp(28px, 3.4vw, 44px);
   max-width: 34ch;
   font-size: clamp(20px, 2.2vw, 25px);
   line-height: 1.32;
@@ -147,7 +153,7 @@ ul { padding: 0; list-style: none; }
 .section-head h2 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(40px, 5.4vw, 64px);
+  font-size: clamp(34px, 4.6vw, 56px);
   line-height: 0.95;
   text-transform: uppercase;
   white-space: nowrap;
@@ -174,8 +180,8 @@ ul { padding: 0; list-style: none; }
 .card { grid-column: span 2; display: flex; flex-direction: column; gap: 8px; text-decoration: none; }
 .card:nth-child(-n+2) { grid-column: span 3; }
 .card .thumb { aspect-ratio: 16 / 10; margin-bottom: 8px; transition: border-color 0.15s; }
-.card h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(28px, 2.8vw, 36px); line-height: 1; text-transform: uppercase; text-wrap: balance; color: var(--display); }
-.card:nth-child(-n+2) h3 { font-size: clamp(32px, 3.6vw, 46px); }
+.card h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(24px, 2.3vw, 30px); line-height: 1; text-transform: uppercase; text-wrap: balance; color: var(--display); }
+.card:nth-child(-n+2) h3 { font-size: clamp(26px, 3.1vw, 40px); }
 .card p { font-size: 15.5px; color: var(--muted); max-width: 46ch; }
 .card-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
 .card .result { color: var(--mark); }
@@ -229,7 +235,7 @@ ul { padding: 0; list-style: none; }
 .back:hover { text-decoration: underline; }
 .page-head { margin: clamp(20px, 4vw, 40px) 0 clamp(28px, 4vw, 44px); padding-bottom: clamp(20px, 3vw, 32px); border-bottom: 1.5px solid var(--ink); }
 .page-head .eyebrow { margin-bottom: 12px; }
-.ptitle { font-family: var(--font-display); font-weight: 800; font-size: clamp(48px, 8vw, 104px); line-height: 0.9; text-transform: uppercase; text-wrap: balance; color: var(--display); }
+.ptitle { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 6.6vw, 88px); line-height: 0.95; text-transform: uppercase; text-wrap: balance; color: var(--display); }
 .ptitle:focus { outline: none; }
 .project .sum:first-child { margin-top: 0; font-size: 19px; line-height: 1.45; }
 .pager { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line); padding-top: 20px; }
@@ -370,7 +376,7 @@ ul { padding: 0; list-style: none; }
 <div class="sheet">
 
   <header class="bar">
-    <a class="mono brand" href="#home">Anson Liang<span class="brand-tail"> · Mechanical engineering portfolio</span></a>
+    <a class="mono brand" href="#home"><span class="brand-name">Anson Liang</span><span class="brand-tail"> · Mechanical engineering portfolio</span></a>
     <nav class="mono" aria-label="Site">
       <details class="menu" id="project-menu">
         <summary>Projects</summary>
